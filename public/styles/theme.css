@@ -562,7 +562,7 @@ embed,
 object {
   display: block;
   /* 1 */
-  vertical-align: middle;
+  /* vertical-align: middle; */
   /* 2 */
 }
 
@@ -1934,6 +1934,11 @@ a:hover {
 
   .sm\:text-lg {
     font-size: 1.125rem;
+  }
+
+  .responsive-wave {
+    width: 100px;
+    height: 500px;
   }
 }
 
