@@ -860,6 +860,10 @@ video {
   height: 1.5rem;
 }
 
+.h-5 {
+  height: 1 rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -2019,6 +2023,10 @@ a:hover {
 
   .md\:text-lg {
     font-size: 1.125rem;
+  }
+
+  .image-center {
+    position: 'center';
   }
 }
 
