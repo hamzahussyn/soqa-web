@@ -2033,6 +2033,10 @@ a:hover {
   .image-center {
     position: 'center';
   }
+
+  .team-responsive{
+    margin:10px
+  }
 }
 
 @media (min-width: 1024px) {
@@ -2192,6 +2196,10 @@ a:hover {
   .lg\:text-base {
     font-size: 1rem;
   }
+
+  .team-responsive{
+    margin:10px
+  }
 }
 
 @media (min-width: 1280px) {
@@ -2210,5 +2218,9 @@ a:hover {
 
   .xl\:pb-32 {
     padding-bottom: 8rem;
+  }
+
+  .team-responsive{
+    margin:10px
   }
 }
