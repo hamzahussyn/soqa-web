@@ -9,6 +9,7 @@
   <link rel="icon" type="image/x-icon" href="https://soqa-web.herokuapp.com/images/favicon.ico.ico">
   <link rel="stylesheet" href="https://soqa-web.herokuapp.com/styles/theme.css">
   <link rel="stylesheet" href="https://soqa-web.herokuapp.com/styles/chat.css">
+  <link rel="stylesheet" href="http://localhost:3001/styles/switch.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -30,7 +31,8 @@
                   <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
                     <div class="flex items-center justify-between w-full md:w-auto"><a
                         href="https://soqa-web.herokuapp.com/"><span class="sr-only">SOQA the Intelligent Bot</span><img
-                          alt="logo" class="h-16 w-auto sm:h-16" src="https://soqa-web.herokuapp.com/images/logo.png"></a>
+                          alt="logo" class="h-16 w-auto sm:h-16"
+                          src="https://soqa-web.herokuapp.com/images/logo.png"></a>
                       <div class="-mr-2 flex items-center md:hidden"><button
                           class="bg-background rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary"
                           id="headlessui-popover-button-1" type="button" aria-expanded="false"><span
@@ -47,8 +49,8 @@
                       class="font-medium text-gray-500 hover:text-gray-900">Features</a><a active="active"
                       class="font-medium text-gray-500 hover:text-gray-900">Pricing</a><a active="active"
                       class="font-medium text-gray-500 hover:text-gray-900">About</a> -->
-                      <a href="#"
-                      class="font-medium text-primary hover:text-secondary">Call to action</a></div>
+                    <a href="#" class="font-medium text-primary hover:text-secondary">Call to action</a>
+                  </div>
                 </nav>
               </div>
             </div>
@@ -66,7 +68,6 @@
         <div class="h-1 mx-auto bg-primary w-64 opacity-25 my-0 py-0 rounded-t mb-10"></div>
       </div>
       <br><br>
-
 
 
       <div class="lazy-div" style="opacity: 1; transform: none;">
@@ -104,6 +105,13 @@
                 <textarea name="message-to-send" id="message-to-send" placeholder="Type your message"
                   rows="2"></textarea>
 
+                <div class="align-self:center">
+                  <label class="switch">
+                    <input id="toggle" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <span style="color: rgb(131, 120, 120); font-size: 12px;">Conversational Mode</span>
                 <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
                 <i class="fa fa-file-image-o"></i>
 
@@ -151,7 +159,7 @@
                   'Oh I didn\'t quite understand that. Give another go!',
                   'Sometimes I am very accurate. But sometimes, I just feel dizzy',
                   'Umm, about me? I am SOQA, made to be your intelligent assistant to improve learning',
-                  'I just don\'t know...'
+                  'I just don\'t know the answer to this.'
                 ],
                 init: function () {
                   this.cacheDOM();
@@ -207,14 +215,16 @@
                     //   openAI = openAI.replace(/[^a-zA-Z ]/g, "");
                     //   console.log(openAI);
                     // })
+                    //https://tranquil-springs-69938.herokuapp.com
                     await axios({
-                      url: `https://tranquil-springs-69938.herokuapp.com/api/answers/philosphy-playground?question=${String(currentQuestion)}`,
+                      url: `http://localhost:3000/api/answers/philosphy-playground?question=${String(currentQuestion)}&&mode=${document.getElementById('toggle').checked ? 'conversational' : 'strict'}`,
                       method: 'GET'
                     }).then((response) => {
+                      console.log(document.getElementById('toggle').checked);
                       let randomNumber = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
-                      if(response.data.answer.length === 0 || response.data.answer === 'Sorry'){
-                        openAI = messageResponses[randomNumber];
-                      } else{
+                      if (response.data.answer.length === 0 || response.data.answer === 'Sorry' || response.data.apiresponse === false) {
+                        openAI = this.messageResponses[randomNumber];
+                      } else {
                         openAI = response.data.answer.substr(currentQuestion.trim().length, response.data.answer.length);
                       }
                     })
@@ -293,7 +303,8 @@
         <img alt="waves" src="https://soqa-web.herokuapp.com/images/waves.png">
         <div id="about" class="mx-auto container xl:px-20 lg:px-12 sm:px-6 px-4 py-12">
           <div class="flex flex-col items-center justify-center">
-            <div><img src="https://soqa-web.herokuapp.com/images/logo.png" alt="SOQA the Intelligent Bot" class="w-16 h-16">
+            <div><img src="https://soqa-web.herokuapp.com/images/logo.png" alt="SOQA the Intelligent Bot"
+                class="w-16 h-16">
             </div>
             <!-- <div class="flex flex-wrap sm:gap-10 gap-8 items-center justify-center mt-4 h-12"><a href="#"
                 class="hover:text-primary text-base cursor-pointer leading-4 text-gray-800 dark:text-gray-400 dark:hover:text-white">Something</a><a
