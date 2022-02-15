@@ -217,7 +217,7 @@
                     // })
                     //https://tranquil-springs-69938.herokuapp.com
                     await axios({
-                      url: `http://localhost:3000/api/answers/philosphy-playground?question=${String(currentQuestion)}&&mode=${document.getElementById('toggle').checked ? 'conversational' : 'strict'}`,
+                      url: `https://tranquil-springs-69938.herokuapp.com/api/answers/philosphy-playground?question=${String(currentQuestion)}&&mode=${document.getElementById('toggle').checked ? 'conversational' : 'strict'}`,
                       method: 'GET'
                     }).then((response) => {
                       console.log(document.getElementById('toggle').checked);
