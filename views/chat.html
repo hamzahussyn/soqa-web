@@ -220,12 +220,23 @@
                       url: `https://tranquil-springs-69938.herokuapp.com/api/answers/philosphy-playground?question=${String(currentQuestion)}&&mode=${document.getElementById('toggle').checked ? 'conversational' : 'strict'}`,
                       method: 'GET'
                     }).then((response) => {
-                      console.log(document.getElementById('toggle').checked);
-                      let randomNumber = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+                      //let randomNumber = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+
                       if (response.data.answer.length === 0 || response.data.answer === 'Sorry' || response.data.apiresponse === false) {
-                        openAI = this.messageResponses[randomNumber];
+                        openAI = 'This question seems to be out of the documents of course material...'
                       } else {
-                        openAI = response.data.answer.substr(currentQuestion.trim().length, response.data.answer.length);
+                        let answer = response.data.answer.substring(0, response.data.answer.lastIndexOf('.') + 1);
+                        answer = answer.split('Context:')[0];
+                        openAI = answer.substring(currentQuestion.trim().length, response.data.answer.length);
+                      }
+
+                      document.getElementById('excerpts').innerHTML = '';
+                      let excerpts = '';
+                      excerpts = `<br><span class="block text-primary xl:inline">Excerpts</span><br>`;
+
+                      if (response.data?.documents) {
+                        response.data?.documents.forEach(element => { element.text!=='undefined ' ? excerpts += `<br><blockquote>${element.text}</blockquote><br>` : ''})
+                        document.getElementById('excerpts').innerHTML = excerpts
                       }
                     })
                     var contextResponse = {
@@ -236,7 +247,7 @@
                     setTimeout(function () {
                       this.$chatHistoryList.append(templateResponse(contextResponse));
                       this.scrollToBottom();
-                    }.bind(this), 1500);
+                    }.bind(this), 100);
 
                   }
 
@@ -293,6 +304,8 @@
 
         </div>
       </div>
+
+      <div id="excerpts" class="text-gray-700" style="padding-left: 100px; padding-right: 100px; padding-top: 30px;text-align: justify;"></div>
 
 
 

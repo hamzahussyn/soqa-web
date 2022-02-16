@@ -1940,6 +1940,13 @@ a:hover {
     width: 100px;
     height: 500px;
   }
+
+  .excerpts {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
+    text-align: justify;
+  }
 }
 
 @media (min-width: 768px) {
@@ -2034,8 +2041,8 @@ a:hover {
     position: 'center';
   }
 
-  .team-responsive{
-    margin:10px
+  .team-responsive {
+    margin: 10px;
   }
 }
 
@@ -2197,8 +2204,8 @@ a:hover {
     font-size: 1rem;
   }
 
-  .team-responsive{
-    margin:10px
+  .team-responsive {
+    margin: 10px;
   }
 }
 
@@ -2220,7 +2227,7 @@ a:hover {
     padding-bottom: 8rem;
   }
 
-  .team-responsive{
-    margin:10px
+  .team-responsive {
+    margin: 10px;
   }
 }
